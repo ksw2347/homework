@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>소설책 팝니다</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap" rel="stylesheet">
+    <style>
+
+        * {
+            font-family: 'Nanum Brush Script', cursive;
+        }
+
+        .book_image {
+            width: 500px;
+            height: 300px;
+            background-image: url("https://img.hani.co.kr/imgdb/resize/2007/1017/119251919483_20071017.JPG");
+            background-position: center;
+            background-size: cover;
+        }
+
+        .price {
+            font-size: 25px;
+        }
+
+        .wrap {
+            margin: auto;
+            width: 500px;
+        }
+
+
+    </style>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "https://api.manana.kr/exchange/rate.json",
+                data: {},
+                success: function (response) {
+                    let nowRate = response[1]['rate'];
+                    $('#rate-box').text(nowRate);
+                }
+            })
+        });
+
+        function order() {
+            let name = $('#order-name').val();
+            let count = $('#order-count').val();
+            let address = $('#order-address').val();
+            let phone = $('#order-phone').val();
+
+            if (name === '') {
+                alert('이름을 입력하세요');
+            } else if (count === '-- 수량을 선택하세요 --') {
+                alert('수량을 입력하세요');
+            } else if (address === '') {
+                alert('주소를 입력하세요');
+            } else if (phone === '') {
+                alert('전화번호를 입력하세요');
+            } else {
+                alert('주문이 완료되었습니다!')
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="wrap">
+    <div class="book_image"></div>
+    <div><h1> 소설책 팝니다 <span class="price">가격:3000원/권</span></h1>
+        생각의 폭을 넓히고 마음의 양식을 채울 수 있는 고급진 책들로만 엄선했습니다.
+    </div>
+
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">주문자 이름</span>
+        </div>
+        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">수량</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01">
+            <option selected>--수량을 선택하세요--</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text">주소</span>
+        </div>
+        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">전화번호</span>
+        </div>
+        <input type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+    </div>
+    <button onclick="order()" type="button" class="btn btn-primary">주문하기</button>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</div>
+</body>
+</html>
